@@ -1,5 +1,4 @@
 <?php
-
 if(isset ($_POST['mydata'])){
 $select = $_POST['mydata'];	}
 else $select= "Not posted";
@@ -86,10 +85,8 @@ case "15":exec("gpio -g read 26", $status);			//Read current status
 		  else system("gpio -g write 26 0");
 		  exec("gpio -g read 26", $status300);		//Reading new status
 		  echo " ".$status300[0];					//Echo back new status
-break;	
-		
+break;			
 }
-
 //--------------------------------Array additions from here--------------------------
 //set up the php associated array
 $sel=array("vhf"=>0, "uhf"=>0, "shf"=>0, "vhf_amp"=>0, "uhf_amp"=>0, "shf_amp"=>0); 
@@ -132,8 +129,13 @@ if($status5[0]==0){$sel["uhf_amp"]='OFF';}
 exec("gpio -g read 26", $status26);			//Read current shf status
 if($status26[0]==1){$sel["shf_amp"]='ON';}	  
 if($status26[0]==0){$sel["shf_amp"]='OFF';}
-//print_r($sel); //Will print the array to the toggle window for checking
+
+//print_r($sel); //Will print the php array to the toggle window for checking
 // Convert to a JSON Array
-$JSON=json_encode($sel);
-//echo $JSON;	Will print the array to the toggle window for checking
+$myjson=json_encode($sel);
+//echo $myjson;	//Will print the json array to the toggle window for checking
+$fh = fopen("myJSON.json", 'w') or die("Failed to create file");
+fwrite($fh, $myjson) or die ("could not write to file");
+fclose($fh);
+//echo "file written OK";
 ?>

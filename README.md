@@ -1,9 +1,2 @@
-# STAGE-8.1
-
-Latest files for RPi Phase 2
-Two files added
-
-Updated the combi php file. Now includes a JSON array giving the status of selected buttons and relays etc
-
-New Combi with the incusion to write a JSON file to disc.
-A new STAGE_8_3.html file. This is the one to now use
+New STAGE_9_0 file uploaded. This completes the project.
+Change the AJAX URL and your IP address to match your local requirements

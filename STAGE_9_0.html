@@ -1,148 +1,164 @@
 
 <!DOCTYPE html> <html lang="en">
-	<head>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" href="http://www.fitnessutah.com/favicon.ico">
+    <style>
+      /*setting up the div formatting*/
 	
-		<meta charset="UTF-8">
+      .wrapper{
+	    max-width:950px;	  		/* Create a screen wrapper of 960px*/
+        height: 650px;
+        margin: 0 auto;           /*Centers the wrapper*/
+        margin-top: 60px;         /*shifts wrapper below browser navigation bar*/
+        background-color:#cccccc;
+        border:2px solid #999999;
+        position: relative;
+	    }
+
+      .first{
+	    border: 2px solid #999999; 
+	    height:150px;
+	    margin:5px;
+	    background-color: #bfbfbf;
+	    } 
+	  
+      .resp{
+	    border: 2px solid #999999; 
+	    height:110px;
+	    margin:5px;background-color: #bfbfbf;
+	    }  
+      /*call back div formatting*/
+      #T3{
+	    position: absolute; 
+	    top: 425px;  
+	    left:185px;
+	    }	/*position of the text box*/	 
+
+      #responseText{
+	    position: absolute; 
+	    top: 50px; 
+	    left:10px; 
+	    margin: 2px; 
+	    font-size: 35px;
+	    } /*id returned here*/
+
+    </style>
+
+    <script src='jquery-3.2.1.js'></script>	
 		
-<style>
+  </head>
 	
-.wrapper{max-width:950px;	  		/* Create a screen wrapper of 960px*/
- height: 600px;
- margin: 0 auto;                  	/*Centers the wrapper*/
- margin-top: 60px;                	/*shifts wrapper below browser navigation bar*/
- background-color:#cccccc;
- border:2px solid #999999;
- position: relative;}
+  <body>
 
-.first{border: 2px solid #999999; height:150px;margin:5px;background-color: #bfbfbf;}  /*setting up the div formatting*/
-.resp{border: 2px solid #999999; height:110px;margin:5px;background-color: #bfbfbf;}  /*call back div formatting*/
+    <Div class="wrapper">
 
-#T3{position: absolute; top: 425px;  left:185px;}	/*position of the text box*/	 
+      <Div class="first">
+        <button id="button_1">VHF. Hor.GP  </button>
+        <button id="button_2">VHF. Hor.Halo</button>
+        <button id="button_3">VHF. Ver.Yagi</button>
+        <button id="button_4">VHF. Hor.Yagi</button>
+         <button id="button_5">VHF. Pre.Amp </button>
+      </div>
 
-#responseText{position: absolute; top: 50px; left:10px; margin: 2px; font-size: 35px;} /*id returned here*/
+      <Div class="first">
+        <button id="button_6" >UHF. Hor.GP  </button>
+        <button id="button_7" >UHF. Hor.Halo</button>
+        <button id="button_8" >UHF. Ver.Yagi</button>
+        <button id="button_9" >UHF. Hor.Yagi</button>
+        <button id="button_10">UHF. Pre.Amp </button>
+      </div>
 
-</style>
+      <Div class="first">
+        <button id="button_11" >Spare </button>
+        <button id="button_12" >Spare </button>
+        <button id="button_13" >Spare </button>
+        <button id="button_14" >Spare </button>
+        <button id="button_15" >SHF. Pre.Amp </button>
+      </div>
 
-        <script src='jquery-3.2.1.js'></script>	
-		
-	</head>
-	
-	<body>
+      <Div class="resp">
+        <button id="button_16" >Toggle CallBack </button>
+      </div>
 
-		<Div class="wrapper">
-
-  			<Div class="first">
-	
-								<button id="button_1">VHF. Hor.GP  </button>
-								<button id="button_2">VHF. Hor.Halo</button>
-								<button id="button_3">VHF. Ver.Yagi</button>
-                                <button id="button_4">VHF. Hor.Yagi</button>
-                                <button id="button_5">VHF. Pre.Amp </button>
-  			</div>
-
-			<Div class="first">
-								<button id="button_6" >UHF. Hor.GP  </button>
-                                <button id="button_7" >UHF. Hor.Halo</button>
-                                <button id="button_8" >UHF. Ver.Yagi</button>
-                                <button id="button_9" >UHF. Hor.Yagi</button>
-                                <button id="button_10">UHF. Pre.Amp </button>
-			</div>
-
-			<Div class="first">
-				<button id="button_11" >Spare </button>
-                                <button id="button_12" >Spare </button>
-                                <button id="button_13" >Spare </button>
-                                <button id="button_14" >Spare </button>
-                                <button id="button_15" >SHF. Pre.Amp </button>
-			</div>
-
-			<Div class="resp">
-                                <button id="button_16" >Toggle CallBack </button>
-			</div>
-
-			<div class="second">
-			<p id="T3"><br><textarea rows="2" cols="34"  id="responseText">  </textarea></p>
-			</div>
-		</div>
+      <div class="second">
+        <p id="T3"><br><textarea rows="2" cols="34"  id="responseText">  </textarea></p>
+      </div>
+	</div>
 		
 <script>  
-$(document).ready (function(){
-
-$("#T3").hide();
-//________________________________________________________________________________________________
-console.log('Fetching JSON');
-
-$.ajax({ 
-		//url:		'http://192.168.1.69/Antenna/myJSON.json', //Change to match your local settings
-		url:		'http://192.168.1.69/Antenna/myTest.json',
-		dataType: 	'json',
-		type: 		'get',
-		cache: 		false,
-		success: 	function(myArray){
-		console.log("The VHF Button is     "+myArray.vhf); 		
-		console.log("The UHF Button is     "+myArray.uhf);
-		console.log("The SHF Button is     "+myArray.shf);
-		console.log("The VHF Amp Button is "+myArray.vhf_amp);
+  $(document).ready (function(){
+    $("#T3").hide();
+    //________________________________________________________________________________________________
+    console.log('Fetching JSON');
+    $.ajax({ 
+      //url:		'http://192.168.1.69/Antenna/myJSON.json', //Change to match your local settings
+      url:		'http://192.168.1.161/Antenna/myJSON.json',
+      dataType: 	'json',
+      type: 		'get',
+      cache: 		false,
+      success: 	function(myArray){
+        console.log("The VHF Button is     "+myArray.vhf); 		
+        console.log("The UHF Button is     "+myArray.uhf);
+        console.log("The SHF Button is     "+myArray.shf);
+        console.log("The VHF Amp Button is "+myArray.vhf_amp);
 		console.log("The UHF Amp Button is "+myArray.uhf_amp);
 		console.log("The SHF Amp Button is "+myArray.shf_amp);
-		var vhf = (myArray.vhf); 
-		var uhf = ((myArray.uhf)+5);
-		var shf = ((myArray.shf)+10);
+		//Setting the 4 way switch buttons	
+		setHighlightButtonNr(myArray.vhf,"ON");
+		setHighlightButtonNr((myArray.uhf)+5,"ON");
+		setHighlightButtonNr((myArray.shf)+10,"ON");
 		//Setting the pre amp button formatting
 		var vhf_amp = (myArray.vhf_amp);
-		if (vhf_amp == "ON"){$("#button_5").css ('background-color', 'red').css('color', 'white');}
-		var uhf_amp = (myArray.uhf_amp);
-		if (uhf_amp == "ON"){$("#button_10").css ('background-color', 'red').css('color', 'white');}
-		var shf_amp = (myArray.shf_amp);
-		if (shf_amp == "ON"){$("#button_15").css ('background-color', 'red').css('color', 'white');}
-		
-		//Setting the 4 way switch buttons		
-		initial(vhf); //calling the function and passing one value
-		initial(uhf); 
-		initial(shf); 
-		}
-	});
+		if (myArray.vhf_amp == "ON") setHighlightButtonNr(5,"ON");
+		if (myArray.uhf_amp == "ON") setHighlightButtonNr(10,"ON");
+		if (myArray.shf_amp == "ON") setHighlightButtonNr(15,"ON");
+		} //succes
+	});  // $.ajax
 	
-//________________________________________________________________________________________________
-myfunction("#button_1", 30,    20);
-myfunction("#button_2", 30,   200);
-myfunction("#button_3", 30,   380);
-myfunction("#button_4", 30,   560);
-myfunction("#button_5", 30,   760);
+    //________________________________________________________________________________________________
+    initButton("#button_1", 30,    20);
+    initButton("#button_2", 30,   200);
+    initButton("#button_3", 30,   380);
+    initButton("#button_4", 30,   560);
+    initButton("#button_5", 30,   760);
 
-myfunction("#button_6", 190,   20);
-myfunction("#button_7", 190,  200);
-myfunction("#button_8", 190,  380);
-myfunction("#button_9", 190,  560);
-myfunction("#button_10",190,  760);
+    initButton("#button_6", 190,   20);
+    initButton("#button_7", 190,  200);
+    initButton("#button_8", 190,  380);
+    initButton("#button_9", 190,  560);
+    initButton("#button_10",190,  760);
 
-myfunction("#button_11", 350,  20);
-myfunction("#button_12", 350, 200);
-myfunction("#button_13", 350, 380);
-myfunction("#button_14", 350, 560);
-myfunction("#button_15", 350, 760);
+    initButton("#button_11", 350,  20);
+    initButton("#button_12", 350, 200);
+    initButton("#button_13", 350, 380);
+    initButton("#button_14", 350, 560);
+    initButton("#button_15", 350, 760);
 
-myfunction("#button_16", 490,  20);
-//----------------------------------------------------------------------------------------------------------------------------------		
-$("#button_1").click(function(){
-$.post("combi.php", {mydata : 1},       function(data){ $("#responseText").val(data);
-//console.log(data);
-if(data=="1"){
-$("#button_2, #button_3, #button_4").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_1").css ('background-color', 'red').css('color', 'white');
-			}           //end of if 	 	
-		}
-	);					//end of post function	 	 
-}); 	  				//end of click function
+    initButton("#button_16", 490,  20);
+    //----------------------------------------------------------------------------------------------------------------------------------		
+  $("#button_1").click(function(){
+    $.post("combi.php",
+	  {mydata : 1},
+	  function(data){ 
+        $("#responseText").val(data);
+       if(data=="1"){for (i=1;i<5;i++) setHighlightButtonNr(i,"OFF");
+          setHighlightButtonNr(1,"ON");		  
+          }      //end of if 	 	
+        }        // end of function(data_
+	  );		 //end of post function	 	 
+    }); 	     //end of click function
 
 
-$("#button_2").click(function(){
-$.post("combi.php", {mydata : 2},       function(data){ $("#responseText").val(data);
-if(data=="2"){
-$("#button_1, #button_3, #button_4").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_2").css ('background-color', 'red').css('color', 'white');
+  $("#button_2").click(function(){
+    $.post("combi.php",
+      {mydata : 2},
+	  function(data){ 
+	    $("#responseText").val(data);
+        if(data=="2"){for (i=1;i<5;i++) setHighlightButtonNr(i,"OFF");	
+           setHighlightButtonNr(2,"ON");	
 			}           //end of if 
-		}
+		}               // end of function (data)
 	); 	       			//end of post function
 });           			//end of click function
 
@@ -150,8 +166,8 @@ $("#button_2").css ('background-color', 'red').css('color', 'white');
 $("#button_3").click(function(){
 $.post("combi.php", {mydata : 3},       function(data){ $("#responseText").val(data);
 if(data=="3"){
-$("#button_1, #button_2, #button_4").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_3").css ('background-color', 'red').css('color', 'white');
+for (i=1;i<5;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(3,"ON");
 			}           //end of if 
 		}
 	);             		//end of post function
@@ -160,41 +176,45 @@ $("#button_3").css ('background-color', 'red').css('color', 'white');
 $("#button_4").click(function(){
 $.post("combi.php", {mydata : 4},       function(data){ $("#responseText").val(data);
 if(data=="4"){
-$("#button_1, #button_2, #button_3").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_4").css ('background-color', 'red').css('color', 'white');
+for (i=1;i<5;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(4,"ON");
 			}           //end of if 
-		}
+		}               // function(data)
 	);             		//end of post function
 });           			//end of click function
 
 $("#button_5").click(function(){
-$.post("combi.php", {mydata : 13},       function(data){ $("#responseText").val(data);
-console.log(data);
-if(data=="13 1"){$("#button_5").css ('background-color', 'red').css('color', 'white');}
-		 else{$("#button_5").css('background-color', '#F0F8FF').css('color', 'black');}
-		}
+  $.post("combi.php",
+  {mydata : 13},
+  function(data){ 
+   $("#responseText").val(data);
+   if(data=="13 1") setHighlightButtonNr(5,"ON");
+   else setHighlightButtonNr(5,"OFF");
+     }  // function(data)
 	); 		 	//end of post function
 });           	//end of click function
 
 /*---------------------------End of row one click functions--------------------------------*/
 
-$("#button_6").click(function(){
-$.post("combi.php", {mydata : 5},       function(data){ $("#responseText").val(data);
-console.log(data);
-if(data=="5"){
-$("#button_7, #button_8, #button_9").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_6").css ('background-color', 'red').css('color', 'white');
-			}		//end of if 
-		}
-	);              //end of post function
-});             	//end of click function
+    $("#button_6").click(function(){
+      $.post("combi.php", 
+	    {mydata : 5},
+	    function(data){ 
+		  $("#responseText").val(data);
+          if(data=="5"){
+             for (i=6;i<10;i++) setHighlightButtonNr(i,"OFF");
+             setHighlightButtonNr(6,"ON");
+		    }		    //end of if 
+		  }             // end of function(data)
+	    );              //end of post function
+      });             	//end of click function
 
 
 $("#button_7").click(function(){
 $.post("combi.php", {mydata : 6},       function(data){ $("#responseText").val(data);
 if(data=="6"){
-$("#button_6, #button_8, #button_9").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_7").css ('background-color', 'red').css('color', 'white');
+for (i=6;i<10;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(7,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
@@ -203,8 +223,8 @@ $("#button_7").css ('background-color', 'red').css('color', 'white');
 $("#button_8").click(function(){
 $.post("combi.php", {mydata : 7},       function(data){ $("#responseText").val(data);
 if(data=="7"){
-$("#button_6, #button_7, #button_9").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_8").css ('background-color', 'red').css('color', 'white');
+for (i=6;i<10;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(8,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
@@ -213,18 +233,21 @@ $("#button_8").css ('background-color', 'red').css('color', 'white');
 $("#button_9").click(function(){
 $.post("combi.php", {mydata : 8},       function(data){ $("#responseText").val(data);
 if(data=="8"){
-$("#button_6, #button_7, #button_8").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_9").css ('background-color', 'red').css('color', 'white');
+for (i=6;i<10;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(9,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
 });             	//end of click function
 
 $("#button_10").click(function(){
-$.post("combi.php", {mydata : 14},       function(data){ $("#responseText").val(data);
-if(data=="14 1"){$("#button_10").css ('background-color', 'red').css('color', 'white');}
-		 else{$("#button_10").css('background-color', '#F0F8FF').css('color', 'black');}
-		}
+  $.post("combi.php", 
+  {mydata : 14},       
+  function(data){ 
+    $("#responseText").val(data);
+    if(data=="14 1") setHighlightButtonNr(10,"ON");
+	else setHighlightButtonNr(10,"OFF");
+	} // end of function(data)
 	);               //end of post function
 });             	//end of click function
 
@@ -233,8 +256,8 @@ if(data=="14 1"){$("#button_10").css ('background-color', 'red').css('color', 'w
 $("#button_11").click(function(){
 $.post("combi.php", {mydata : 9},       function(data){ $("#responseText").val(data);
 if(data=="9"){
-$("#button_12, #button_13, #button_14").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_11").css ('background-color', 'red').css('color', 'white');
+for (i=11;i<15;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(11,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
@@ -244,8 +267,8 @@ $("#button_11").css ('background-color', 'red').css('color', 'white');
 $("#button_12").click(function(){
 $.post("combi.php", {mydata : 10},       function(data){ $("#responseText").val(data);
 if(data=="10"){
-$("#button_11, #button_13, #button_14").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_12").css ('background-color', 'red').css('color', 'white');
+for (i=11;i<15;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(12,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
@@ -254,8 +277,8 @@ $("#button_12").css ('background-color', 'red').css('color', 'white');
 $("#button_13").click(function(){
 $.post("combi.php", {mydata : 11},       function(data){ $("#responseText").val(data);
 if(data=="11"){
-$("#button_11, #button_12, #button_14").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_13").css ('background-color', 'red').css('color', 'white');
+for (i=11;i<15;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(13,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
@@ -264,8 +287,8 @@ $("#button_13").css ('background-color', 'red').css('color', 'white');
 $("#button_14").click(function(){
 $.post("combi.php", {mydata : 12},       function(data){ $("#responseText").val(data);
 if(data=="12"){
-$("#button_11, #button_12, #button_13").css('background-color', '#F0F8FF').css('color', 'black');
-$("#button_14").css ('background-color', 'red').css('color', 'white');
+for (i=11;i<15;i++) setHighlightButtonNr(i,"OFF");
+setHighlightButtonNr(14,"ON");
 			}		//end of if 
 		}
 	);              //end of post function
@@ -273,9 +296,9 @@ $("#button_14").css ('background-color', 'red').css('color', 'white');
 
 $("#button_15").click(function(){
 $.post("combi.php", {mydata : 15},       function(data){ $("#responseText").val(data);
-if(data=="15 1"){$("#button_15").css ('background-color', 'red').css('color', 'white');}
-        else{$("#button_15").css('background-color', '#F0F8FF').css('color', 'black');}
-		}
+if(data=="15 1")setHighlightButtonNr(15,"ON");
+        else setHighlightButtonNr(16,"OFF");
+	} // end of function(data)
 	);               //end of post function
 });             	 //end of click function 
 
@@ -286,47 +309,34 @@ $("#button_16").click(function(){$("#T3").toggle();});
 });  		//end of doc ready	
 
 /*-----------------------------myCustom Functions-------------------------------------------*/
-
-function myfunction(button, y, x){$(button).css('position', 'absolute').
-	       css('top' ,   y).
-	       css('left',   x).
-	       css( 'width','168px').
-	       css('height','100px').
-	       css('background-color','#F0F8FF').
-	       css('font-size','30px');}		//Positioning and formatting buttons
+    //Positioning and formatting buttons
+    function initButton(button, y, x){
+      $(button)
+        .css('position', 'absolute')
+	    .css('top' ,   y)
+	    .css('left',   x)
+	    .css( 'width','168px')
+	    .css('height','100px')
+	    .css('background-color','#F0F8FF')
+	    .css('font-size','30px');
+	  }		
 		   
-function initial(s){
-console.log(s);
-
-switch (s){
-	case 1 : $("#button_1").css ('background-color', 'red').css('color', 'white');
-	break;
-	case 2 : $("#button_2").css ('background-color', 'red').css('color', 'white');
-	break;	
-	case 3 : $("#button_3").css ('background-color', 'red').css('color', 'white');
-	break;	
-	case 4 : $("#button_4").css ('background-color', 'red').css('color', 'white');
-	break;	
-	case 6 : $("#button_6").css ('background-color', 'red').css('color', 'white');
-	break;
-	case 7 : $("#button_7").css ('background-color', 'red').css('color', 'white');
-	break;
-	case 8 : $("#button_8").css ('background-color', 'red').css('color', 'white');
-	break;
-	case 9 : $("#button_9").css ('background-color', 'red').css('color', 'white');
-	break;
-	case 11 : $("#button_11").css ('background-color', 'red').css('color', 'white');
-	break;	
-	case 12 : $("#button_12").css ('background-color', 'red').css('color', 'white');
-	break;	
-	case 13 : $("#button_13").css ('background-color', 'red').css('color', 'white');
-	break;	
-	case 14 : $("#button_14").css ('background-color', 'red').css('color', 'white');
-	break;
-	}
-}
+    function setHighlightButtonNr(n,onoff){
+      //console.log("setHighlightButtonNr() is called with "+n+ " "+onoff);
+	  if (onoff == "ON"){
+	    $("#button_"+n)
+		  .css ('background-color', 'red')
+		  .css('color', 'white');
+		}
+      else if (onoff == "OFF"){
+        $("#button_"+n)
+		  .css('background-color', '#F0F8FF')
+		  .css('color', 'black');  
+	    }
+      else console.log("wrong on/off value received");		
+      }
 
 	
-</script>
-	</body>	
+    </script>
+  </body>	
 </html>

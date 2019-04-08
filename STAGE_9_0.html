@@ -188,6 +188,7 @@ $("#button_5").click(function(){
   {mydata : 13},
   function(data){ 
    $("#responseText").val(data);
+  // console.log(" data for button_5 :  ".data);
    if(data=="13 1") setHighlightButtonNr(5,"ON");
    else setHighlightButtonNr(5,"OFF");
      }  // function(data)
@@ -290,14 +291,14 @@ if(data=="12"){
 for (i=11;i<15;i++) setHighlightButtonNr(i,"OFF");
 setHighlightButtonNr(14,"ON");
 			}		//end of if 
-		}
+		}           // end of function(data)
 	);              //end of post function
 });             	//end of click function 
 
 $("#button_15").click(function(){
 $.post("combi.php", {mydata : 15},       function(data){ $("#responseText").val(data);
 if(data=="15 1")setHighlightButtonNr(15,"ON");
-        else setHighlightButtonNr(16,"OFF");
+        else setHighlightButtonNr(15,"OFF");
 	} // end of function(data)
 	);               //end of post function
 });             	 //end of click function 
@@ -322,7 +323,7 @@ $("#button_16").click(function(){$("#T3").toggle();});
 	  }		
 		   
     function setHighlightButtonNr(n,onoff){
-      //console.log("setHighlightButtonNr() is called with "+n+ " "+onoff);
+      console.log("setHighlightButtonNr() is called with "+n+ " "+onoff);
 	  if (onoff == "ON"){
 	    $("#button_"+n)
 		  .css ('background-color', 'red')
